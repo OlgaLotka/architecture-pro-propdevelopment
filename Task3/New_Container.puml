@@ -1,0 +1,17 @@
+@startuml
+title SmartHome Container Diagram
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(person, "Собственник", "Управляет умным домом")
+
+System(mobileApp, "Мобильное приложение", "Управление умным домом")
+
+System_Ext(intercom, "Интеллектуальный домофон", "Открывание двери по биометрии")
+System_Ext(barrier, "Интеллектуальный шлагбаум", "Открывание шлагбаума по номеру машины")
+
+Rel(person, mobileApp, "Управляет умным домом")
+Rel(mobileApp, intercom,"Открывание двери по биометрии")
+Rel(mobileApp, barrier,"Открывание шлагбаума по номеру машины")
+
+@enduml
