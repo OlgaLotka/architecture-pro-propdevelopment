@@ -4,53 +4,21 @@
 kubectl apply -f 01-create-namespace.yaml
 ```
 
-Развертывание манифестов с нарушениями
+Запуск политики безопастности
+
 ```bash
-kubectl apply -f insecure-manifests/01-privileged-pod.yaml
-```
-```bash
-kubectl apply -f insecure-manifests/02-hostpath-pod.yaml 
-```
-```bash
-kubectl apply -f insecure-manifests/03-root-user-pod.yaml
+bash verify/validate-security.sh
 ```
 
-Развертывание манифестов без нарушений
-```bash
-kubectl apply -f secure-manifests/01-secure.yaml
-```
-```bash
-kubectl apply -f secure-manifests/02-hostpath-pod.yaml 
-```
-```bash
-kubectl apply -f secure-manifests/03-secure.yaml
-```
 
 Настройка OPA Gatekeeper с набором правил:
+
+Установка Gatekeeper
 ```bash
-kubectl apply -f gatekeeper/constraint-templates/privileged.yaml
-```
-```bash
-kubectl apply -f gatekeeper/constraints/privileged.yaml
+kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml
 ```
 
+Запуск OPA Gatekeeper
 ```bash
-kubectl apply -f gatekeeper/constraint-templates/hostpath.yaml
-```
-```bash
-kubectl apply -f gatekeeper/constraints/hostpath.yaml
-```
-
-```bash
-kubectl apply -f gatekeeper/constraint-templates/runasnonroot.yaml
-```
-```bash
-kubectl apply -f gatekeeper/constraints/runasnonroot.yaml
-```
-
-```bash
-kubectl apply -f gatekeeper/constraint-templates/hostpath.yaml
-```
-```bash
-kubectl apply -f gatekeeper/constraints/hostpath.yaml
+bash verify/verify-admission.sh
 ```
