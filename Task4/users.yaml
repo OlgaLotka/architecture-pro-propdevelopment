@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Config
+preferences: {}
+users:
+  - name: kubernetes-admin
+    user:
+      password: REDACTED
+      username: admin
+  - name: node-admin
+    user:
+      password: REDACTED
+      username: node-admin

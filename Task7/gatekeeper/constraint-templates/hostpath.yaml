@@ -1,0 +1,19 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: disallowhostpath
+spec:
+  crd:
+    spec:
+      names:
+        kind: DisallowHostPath
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package disallow_host_path
+
+        violation[{"msg": msg}] {
+          input.request.namespace == ["audit-zone"]
+          input.request.object.spec.volumes[0].hostPath.path == ""
+          msg := "host path are not allowed in the audit-zone namespace."
+        }
