@@ -16,5 +16,6 @@ spec:
           input.request.namespace == ["audit-zone"]
           input.request.object.spec.securityContext.runAsUser == 0
           input.request.object.spec.securityContext.runAsGroup == 0
+          input.request.object.spec.securityContextreadOnlyRootFilesystem == true
           msg := "Run by root are not allowed in the audit-zone namespace."
         }
